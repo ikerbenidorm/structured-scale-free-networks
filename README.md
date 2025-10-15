@@ -77,3 +77,13 @@ This group assignment for the **Complex Networks** course implements and investi
 ## Citation
 
 If you use this code or cite our work, please reference this repository.
+
+```bibtex
+@misc{structured_scale_free_networks,
+  author       = {Capa Sandoval, Victor Alexander and Garcia Tripiana, Diego Ismael and Lomas Javaloyes, Iker and Solis Calero, Christian},
+  title        = {Structured Scale-Free Networks: Code and Analysis},
+  howpublished = {GitHub repository},
+  year         = {2025},
+  url          = {https://github.com/ikerbenidorm/structured-scale-free-networks}
+}
+```
