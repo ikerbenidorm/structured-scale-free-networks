@@ -1,0 +1,1 @@
+from .HighClusteredModel import hc_scale_free_graph
