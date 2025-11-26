@@ -4,6 +4,15 @@ from collections import deque
 import random
 import matplotlib.pyplot as plt
 
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+plt.rcParams['font.serif'] = ['Times New Roman']  # Especifica Times New Roman
+plt.rc('font', size=18)  # Ajusta el tamaño de la fuente según prefieras 18
+plt.rcParams['grid.linestyle'] = '--'  # Estilo de línea del grid
+plt.rcParams['grid.linewidth'] = 0.4   # Ancho de línea del grid
+plt.rcParams['grid.alpha'] = 0.6       # Transparencia del grid
+plt.rcParams['axes.grid'] = True       # Activa el grid de manera predeterminada en todos los ejes
+
 def nx_BFS(G, start_node):
     #We will be using the BFS algorithm
     queue = deque()
@@ -33,7 +42,7 @@ def mu_L(G, current_node, L):
     mu = sum/(len(G)-1)
     return mu
 
-def dimension(G, diameter, q):
+def dimension_analysis(G, diameter, q):
     all_nodes = list(G.nodes)
     sample_size = int(len(G)/10) #This is the number of nodes for doing the average, we will be choosing random nodes
     random_nodes = random.sample(all_nodes , sample_size)
@@ -49,20 +58,21 @@ def dimension(G, diameter, q):
         for L in range (1, diameter + 1 ):
             mu_value = 0.
             for node in random_nodes:
-                mu_value += mu_L(G, node, L)^{q-1}
+                mu_value += mu_L(G, node, L)**(q-1)
+            mu_value /= sample_size
             dimension.append(mu_value)
             
     return dimension
 
 def fit_dimension(G, diameter, q):
-    dimension = dimension(G,diameter, q)
+    dimension = dimension_analysis(G,diameter, q)
     L_values = list(range(1, diameter + 1))
     log_L = np.log(L_values)
     log_mu = np.log(dimension)
     
     #Choose the values for the fit
-    log_L_fit = log_L[10:]
-    log_mu_fit = log_mu[10:]
+    log_L_fit = log_L[:]
+    log_mu_fit = log_mu[:]
     
     slope, intercept = np.polyfit(log_L_fit, log_mu_fit, 1)
     
@@ -82,8 +92,8 @@ def fit_dimension(G, diameter, q):
     else:
         plt.ylabel(r'$\ln \langle \mu_L^{q-1} \rangle_X$')
         plt.title(f'Dimension Estimate (q={q})')
-    plt.legend()
+    # plt.legend()
     plt.tight_layout()
     plt.show()  # Displays the plot
-        
+    
     return dimension_value
