@@ -38,21 +38,21 @@ def hc_scale_free_graph(n, m=3, a=0.5, directed=True, seed=None):
     # Initialize Graph
     G = nx.DiGraph() if directed else nx.Graph()
 
-    # 1. Initialization: Fully connected graph of m active nodes [cite: 101]
+    # 1. Initialization: Fully connected graph of m active nodes
     for x in range(m):
         for y in range(x + 1, m):
             G.add_edge(x, y)
             if directed:
                 G.add_edge(y, x)
 
-    active_nodes = list(range(m))     # List of active nodes [cite: 98]
+    active_nodes = list(range(m))     # List of active node
     # Initial degrees: in a fully connected size m, everyone has m-1 links
     k = {x: m - 1 for x in range(m)}  
 
     # 2. Growth and Deactivation Loop
     i = m
     while i < n:
-        # --- Growth Step [cite: 102-104] ---
+        # --- Growth Step ---
         G.add_node(i)
         k[i] = 0
 
@@ -63,12 +63,12 @@ def hc_scale_free_graph(n, m=3, a=0.5, directed=True, seed=None):
             k[j] += 1
 
             # If undirected, we must also count the degree increase for i
-            if not directed:
-                k[i] += 1
+            #if not directed:
+                #k[i] += 1
 
-        active_nodes.append(i) # [cite: 105]
+        active_nodes.append(i)
 
-        # --- Deactivation Step [cite: 105-107] ---
+        # Deactivation Step
         # Probability P(kj) ~ 1 / (a + kj)
         weights = [1 / (a + k[j]) for j in active_nodes]
         total_weight = sum(weights)
