@@ -1,6 +1,6 @@
 # Structured Scale-Free Networks
 
-## Getting Started
+## Getting Started for collaborators
 
 Clone the repository and create a feature branch:
 ```bash
