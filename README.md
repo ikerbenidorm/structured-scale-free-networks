@@ -45,7 +45,7 @@ pip install -r requirements.txt
   - visualization  
 
 - **notebooks/**  
-  The main Jupyter notebook (`main.ipynb`) that ties together modules in `src/` and runs end-to-end experiments.
+  The main Jupyter notebook (`Results.ipynb`) that ties together modules in `src/` and runs end-to-end experiments.
 
 - **data/**  
   Sample inputs, generated networks, and result files (CSV, images).
